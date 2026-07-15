@@ -242,6 +242,29 @@
             stroke-linejoin: round;
         }
 
+        /* --- 🤫 SECRET GOLF BALL BUTTON --- */
+        .secret-golf-ball-btn {
+            position: absolute;
+            
+            /* Adjust these to perfectly center the circle over your golf ball */
+            bottom: 17%; 
+            left: 50%;
+            transform: translateX(-50%);
+            
+            /* Size of the clickable area */
+            width: 28%; 
+            aspect-ratio: 1 / 1; 
+            border-radius: 50%; /* Makes the invisible button a perfect circle */
+            
+            z-index: 10;
+            cursor: pointer;
+            display: block;
+            
+            /* 🚨 TEMPORARY: Leave this on to align the button, then delete it to make it invisible! */
+            border: 2px dashed red; 
+            background-color: rgba(255, 0, 0, 0.2); 
+        }
+
     </style>
 </head>
 <body>
@@ -290,9 +313,17 @@
                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                 </svg>
                 
-                <div class="column-text-right">FOLLOW US<br>FOR<br>UPDATES</div>
+                <div class="column-text-right">FOLLOW US<br>FOR<br>UPDATES!</div>
             </a>
         </div>
+
+        <!-- 🤫 INVISIBLE GOLF BALL WHATSAPP BUTTON -->
+        <a href="https://chat.whatsapp.com/YOUR_INVITE_LINK_HERE" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="secret-golf-ball-btn"
+           title="Join our AELO Golf WhatsApp Group!">
+        </a>
 
     </div>
 
