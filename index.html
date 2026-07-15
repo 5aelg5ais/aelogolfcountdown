@@ -134,10 +134,10 @@
             font-size: 1.2rem;
             font-weight: 700;
             letter-spacing: 5px;
-            color: #FFD700; /* Sunset Gold */
+            color: #ffffff; 
             margin-top: 10px;
             text-transform: uppercase;
-            text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.5);
         }
 
         /* Accelerated pulsing kinetic speed loop */
@@ -149,6 +149,99 @@
                 text-shadow: 0 0 12px #fff, 0 0 25px rgba(255, 215, 0, 1), 0 0 40px rgba(255, 215, 0, 0.8);
             }
         }
+
+       /* --- 📝 SIDE COLUMNS FRAMEWORK --- */
+        .side-panel {
+            position: absolute;
+            top: 50%; /* Centers vertically */
+            transform: translateY(-50%);
+            width: 25%; /* Fits perfectly inside your white transparent columns */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .left-panel {
+            left: 0;
+        }
+
+        .right-panel {
+            right: 0;
+        }
+
+        /* Bold, condensed text matching your reference */
+        .column-text-left {
+            font-family: "Impact", "Arial Black", "Segoe UI Black", sans-serif;
+            font-size: clamp(1.5rem, 3vw, 1.2rem);
+            line-height: 1.05;
+            color: #000000;
+            letter-spacing: 0.5px;
+        }
+        /* Different font sizing for left and right column text */
+        .column-text-right {
+            font-family: "Impact", "Arial Black", "Segoe UI Black", sans-serif;
+            font-size: clamp(1rem, 3vw, 1.1rem);
+            line-height: 1.05;
+            color: #000000;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- ⬅️ LEFT COLUMN STYLES --- */
+ 
+
+        .register-link-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none; 
+            color: inherit;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .register-link-group:hover {
+            transform: scale(1.05); /* Slight pop effect on hover */
+        }
+
+        .register-icon {
+            width: clamp(45px, 7vw, 65px);
+            height: clamp(45px, 7vw, 65px);
+            margin-top: 12px;
+            fill: none;
+            stroke: #000000;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* --- ➡️ RIGHT COLUMN STYLES --- */
+        .insta-link-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none; /* Removes the default blue underline from links */
+            color: inherit;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .insta-link-group:hover {
+            transform: scale(1.05); /* Slight pop effect on hover */
+        }
+
+        .insta-icon {
+            width: clamp(40px, 6vw, 60px);
+            height: clamp(40px, 6vw, 60px);
+            margin-bottom: 12px;
+            fill: none;
+            stroke: #000000;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
     </style>
 </head>
 <body>
@@ -166,6 +259,39 @@
         <div class="counter-overlay-box">
             <h1 class="dynamic-number" id="days-count">--</h1>
             <p class="dynamic-label" id="days-label">Days To Go</p>
+        </div>
+
+        <!-- ⬅️ LEFT COLUMN: Registration -->
+        <div class="side-panel left-panel">
+            <a href="https://form.gov.sg/6a424307fb2b9992c94bbd02" target="_blank" rel="noopener noreferrer" class="register-link-group">
+
+                <div class="column-text-left">REGISTER<br>HERE!</div>
+            
+                <!-- SVG Clipboard/Form Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="register-icon">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+
+            </a>
+        </div>
+
+        <!-- ➡️ RIGHT COLUMN: Instagram -->
+        <div class="side-panel right-panel">
+            <!-- Clickable Instagram Group -->
+            <a href="https://www.instagram.com/aelo_golf?igsh=MXRjaXR4MDBrcWNkZw==" target="_blank" rel="noopener noreferrer" class="insta-link-group">
+                <!-- SVG Instagram Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="insta-icon">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+                
+                <div class="column-text-right">FOLLOW US<br>@AELO_GOLF</div>
+            </a>
         </div>
 
     </div>
@@ -197,10 +323,10 @@
             labelDOM.innerText = "Day To Go";
         } else if (totalDaysRemaining === 0) {
             numberDOM.innerText = "🎉";
-            labelDOM.innerText = "It's Dinner Day!";
+            labelDOM.innerText = "It's AELO Golf Day!";
         } else {
             numberDOM.innerText = "00";
-            labelDOM.innerText = "Event Concluded";
+            labelDOM.innerText = "See You At Next Year's Par-Tee!";
         }
     }
 
