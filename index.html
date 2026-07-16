@@ -38,7 +38,7 @@
             position: relative;
             
             /* Reference Background Image Setup */
-            background-image: url('Countdown Template.png');
+            background-image: url('Countdown Template v3.png');
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
@@ -267,6 +267,38 @@
             background-color: rgba(255, 0, 0, 0.2); */
         }
 
+        /* --- 📅 EVENT DETAILS STYLING --- */
+        .event-details {
+            position: absolute;
+            /* Adjust this bottom percentage to nudge the text up or down above the ball */
+            bottom: 35%; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70%;
+            text-align: center;
+            z-index: 5;
+            color: #ffffff; /* Crisp white text */
+            
+            /* A heavy, dark shadow ensures the text pops against the bright grass */
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 30, 0, 0.6);
+        }
+
+        .event-title {
+            font-family: "Impact", "Arial Black", "Segoe UI Black", sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2.1rem);
+            margin: 0 0 8px 0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .event-info {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: clamp(1.0rem, 3.5vw, 1.2rem);
+            font-weight: 700;
+            margin: 4px 0;
+            letter-spacing: 0.5px;
+        }
+
     </style>
 </head>
 <body>
@@ -284,6 +316,14 @@
         <div class="counter-overlay-box">
             <h1 class="dynamic-number" id="days-count">--</h1>
             <p class="dynamic-label" id="days-label">Days To Go</p>
+        </div>
+
+        <!-- 📅 EVENT DETAILS OVERLAY -->
+        <div class="event-details">
+            <h2 class="event-title">AELO Golf & Dinner</h2>
+            <p class="event-info">2 Oct 2026</p>
+            <p class="event-info">Sembawang Country Club</p>
+            <p class="event-info">1230H to 2100H</p>
         </div>
 
         <!-- ⬅️ LEFT COLUMN: Registration -->
@@ -320,12 +360,13 @@
         </div>
 
         <!-- 🤫 INVISIBLE GOLF BALL WHATSAPP BUTTON -->
-        <a href="https://chat.whatsapp.com/YOUR_INVITE_LINK_HERE" 
-           target="_blank" 
-           rel="noopener noreferrer" 
+        <a href="#" 
+           onclick="triggerGolfBlooper(event)"
            class="secret-golf-ball-btn"
            title="Join our AELO Golf WhatsApp Group!">
         </a>
+
+        
 
     </div>
 
@@ -364,6 +405,17 @@
     }
 
     window.onload = runSystemCountdownEngine;
+
+    function triggerGolfBlooper(event) {
+        // Prevents the page from jumping to the top when clicked
+        event.preventDefault(); 
+        
+        // 💬 Choose your favorite pun here!
+        alert("Nice drive! 🏌️‍♂️ You've landed straight on the WhatsApp green. See you in the clubhouse!");
+        
+        // 🔗 Replace this with your actual WhatsApp invite link
+        window.open("https://chat.whatsapp.com/CmTnh54YVTUHW8FwMI2hJ6", "_blank");
+    }
     </script>
 </body>
 </html>
