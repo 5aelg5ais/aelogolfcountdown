@@ -319,10 +319,10 @@
         .event-highlights {
             position: absolute;
             /* Adjust this bottom percentage to nudge the text up or down above the ball */
-            bottom: 38%; 
+            bottom: 35%; 
             left: 50%;
             transform: translateX(-50%);
-            width: 70%;
+            width: 55%;
             text-align: center;
             z-index: 5;
             color: rgba(255, 215, 0, 1); /* gold */
@@ -337,6 +337,11 @@
             font-weight: 700;
             margin: 4px 0;
             letter-spacing: 0.5px;
+            /* 🚧 NEW: WRAPPING CONTROLS 🚧 */
+            max-width: 44vw; /* Locks the width strictly to the center channel */
+            white-space: normal; /* Ensures normal text wrapping behavior */
+            overflow-wrap: break-word; /* Forces a break if a single word is somehow too long */
+            line-height: 1.3; /* Adds a bit of vertical breathing room when the text breaks into two lines */
         }
 
     </style>
