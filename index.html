@@ -29,6 +29,59 @@
             align-items: center;
         }
 
+        /* --- 🎬 INTRO CURTAIN SYSTEM --- */
+        #intro-curtain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000000; /* Solid pitch black screen */
+            z-index: 99999; /* Forces it above every single layer on the page */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            /* Smooth cinematic easing for the curtain lift */
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        /* Triggered via JS: Moves the whole black sheet straight up out of view */
+        #intro-curtain.lift-curtain {
+            transform: translateY(-100%);
+        }
+
+        /* 3D Intro Golf Ball */
+        .intro-golf-ball {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at 35% 35%, #ffffff, #e0e0e0, #888888);
+            border-radius: 50%;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            /* 1.4 second animation simulating a shot flying into the center foreground */
+            animation: introBallFlyIn 1.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+
+        /* Animation: Ball comes from bottom-left corner, arcs, scales up dramatically */
+        @keyframes introBallFlyIn {
+            0% {
+                transform: translate(-60vw, 60vh) scale(0.1);
+                opacity: 0;
+            }
+            30% {
+                opacity: 1;
+            }
+            70% {
+                /* Simulates peaking slightly past center before settling */
+                transform: translate(0, -20px) scale(1.6); 
+            }
+            100% {
+                transform: translate(0, 0) scale(1.4);
+                opacity: 1;
+            }
+        }
+
         /* 9:16 Aspect Ratio Poster Framework */
         .poster-container {
             width: 100vw;
@@ -319,6 +372,10 @@
 </head>
 <body>
 
+    <div id="intro-curtain">
+        <div class="intro-golf-ball"></div>
+    </div>
+
     <div class="poster-container">
         
         <!-- Flying Golf Balls Animation -->
@@ -388,6 +445,23 @@
     </div>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        const curtain = document.getElementById('intro-curtain');
+        
+        if (curtain) {
+            // 1. Wait 1.6 seconds for the golf ball fly-in animation to completely finish
+            setTimeout(function() {
+                curtain.classList.add('lift-curtain'); // Slides the curtain up
+                
+                // 2. Wait 1.2 seconds (matching the CSS transition time) to remove it from layout completely
+                setTimeout(function() {
+                    curtain.style.display = 'none';
+                }, 1200);
+                
+            }, 1600);
+        }
+    });
+
     function runSystemCountdownEngine() {
         // 1. Get current time explicitly forced into Singapore Time (Asia/Singapore)
         const nowSG = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Singapore" }));
