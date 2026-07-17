@@ -315,6 +315,30 @@
             animation: neonPulseFast 1s ease-in-out infinite alternate;
         }
 
+        /* --- EVENT HIGHLIGHTS STYLING --- */
+        .event-highlights {
+            position: absolute;
+            /* Adjust this bottom percentage to nudge the text up or down above the ball */
+            bottom: 38%; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70%;
+            text-align: center;
+            z-index: 5;
+            color: rgba(255, 215, 0, 1); /* gold */
+            
+            /* A heavy, dark shadow ensures the text pops against the bright grass */
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 30, 0, 0.6);
+        }
+
+        .event-highlights-items {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: clamp(0.3rem, 1vw, 0.9rem);
+            font-weight: 700;
+            margin: 4px 0;
+            letter-spacing: 0.5px;
+        }
+
     </style>
 </head>
 <body>
@@ -341,6 +365,11 @@
             <p class="event-info">Sembawang Country Club</p>
             <p class="event-info">1230H to 2130H</p>
             <p class="event-clinic">(Golf Clinic Included)</p>
+        </div>
+
+        <!-- EVENT HIGLIGHTS -->
+        <div class="event-highlights">
+            <p class="event-highlights-items">Refreshed 18-Holes Course | Relaxing Buffet Dinner | Rekindled Camaraderie</p>
         </div>
 
         <!-- ⬅️ LEFT COLUMN: Registration -->
