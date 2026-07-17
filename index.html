@@ -51,33 +51,35 @@
             transform: translateY(-100%);
         }
 
-        /* 3D Intro Golf Ball */
+        /* 3D Intro Golf Ball (Image Version) */
         .intro-golf-ball {
-            width: 60px;
-            height: 60px;
-            background: radial-gradient(circle at 35% 35%, #ffffff, #e0e0e0, #888888);
-            border-radius: 50%;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
+            /* 1️⃣ INCREASE THESE NUMBERS to match your background ball */
+            /* Try starting with these larger values: (Min, Ideal, Max) */
+            width: clamp(150px, 25vw, 250px); 
+            
+            aspect-ratio: 1 / 1;
+            object-fit: contain; 
+            filter: drop-shadow(0 15px 20px rgba(0, 0, 0, 0.8));
             opacity: 0;
-            /* 1.4 second animation simulating a shot flying into the center foreground */
             animation: introBallFlyIn 1.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
         }
 
         /* Animation: Ball comes from bottom-left corner, arcs, scales up dramatically */
         @keyframes introBallFlyIn {
             0% {
-                transform: translate(-60vw, 60vh) scale(0.1);
+                transform: translate(-60vw, 60vh) scale(0.1) rotate(-90deg); 
                 opacity: 0;
             }
             30% {
                 opacity: 1;
             }
             70% {
-                /* Simulates peaking slightly past center before settling */
-                transform: translate(0, -20px) scale(1.6); 
+                /* The "overshoot" bounce before it settles */
+                transform: translate(0, -20px) scale(1.2) rotate(10deg); 
             }
             100% {
-                transform: translate(0, 0) scale(1.4);
+                /* 2️⃣ SET SCALE TO 1 so the base width controls the exact final size */
+                transform: translate(0, 0) scale(1) rotate(0deg);
                 opacity: 1;
             }
         }
@@ -372,8 +374,10 @@
 </head>
 <body>
 
+    <!-- 🎬 INTRO BLACK CURTAIN LAYER -->
     <div id="intro-curtain">
-        <div class="intro-golf-ball"></div>
+        <!-- 💡 Replace 'aelo-ball-cutout.png' with your actual image file path -->
+        <img src="aelo-ball-cutout.jpeg" alt="AELO Golf Ball" class="intro-golf-ball">
     </div>
 
     <div class="poster-container">
