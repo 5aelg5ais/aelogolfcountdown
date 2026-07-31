@@ -299,27 +299,70 @@
             stroke-linejoin: round;
         }
 
-        /* --- 🤫 SECRET GOLF BALL BUTTON --- */
-        .secret-golf-ball-btn {
+        /* --- 🤫 EASTER EGG GOLF BALL CONTAINER --- */
+        .secret-golf-ball-container {
             position: absolute;
-            
-            /* Adjust these to perfectly center the circle over your golf ball */
-            bottom: 17%; 
+            /* Adjust this bottom % so the container sits right over your background ball */
+            bottom: 20%; 
             left: 50%;
             transform: translateX(-50%);
-            
-            /* Size of the clickable area */
-            width: 28%; 
-            aspect-ratio: 1 / 1; 
-            border-radius: 50%; /* Makes the invisible button a perfect circle */
-            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             z-index: 10;
+        }
+
+        /* "HIT ME!" Hint Text */
+        .hit-me-hint {
+            font-family: "Impact", "Arial Black", "Segoe UI Black", sans-serif;
+            font-size: clamp(0.75rem, 2.2vw, 0.95rem);
+            color: #ffffff;
+            letter-spacing: 1px;
+            
+            /* A semi-transparent dark pill background makes it readable against the grass */
+            background-color: rgba(0, 0, 0, 0.45);
+            padding: 3px 10px;
+            border-radius: 12px;
+            margin-bottom: 6px; /* Space between the text label and the ball */
+            
+            /* Subtle drop shadow and border for a clean look */
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+            
+            /* Optional: Gentle floating animation to draw attention */
+            animation: gentleBounce 2s ease-in-out infinite;
+            pointer-events: none; /* Ensures clicking the text doesn't block clicks to the ball */
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Clickable Invisible Circle */
+        .secret-golf-ball-btn {
+            width: clamp(60px, 12vw, 90px); 
+            aspect-ratio: 1 / 1; 
+            border-radius: 50%;
             cursor: pointer;
             display: block;
             
-            /* 🚨 TEMPORARY: Leave this on to align the button, then delete it to make it invisible! */
-            /*border: 2px dashed red; 
-            background-color: rgba(255, 0, 0, 0.2); */
+            /* 🚨 TEMPORARY: Uncomment the line below if you need to visually re-center the clickable circle over the ball */
+            border: 2px dashed red; 
+        }
+
+        /* Hover effect: Makes the label pop when user hovers over the golf ball */
+        .secret-golf-ball-btn:hover ~ .hit-me-hint,
+        .secret-golf-ball-container:hover .hit-me-hint {
+            background-color: rgba(0, 0, 0, 0.85);
+            border-color: #FFD700; /* Turns the subtle border gold on hover! */
+            color: #FFD700;
+        }
+
+        /* Gentle bounce animation for the label */
+        @keyframes gentleBounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-4px);
+            }
         }
 
         /* --- 📅 EVENT DETAILS STYLING --- */
@@ -437,12 +480,18 @@
             </a>
         </div>
 
-        <!-- 🤫 INVISIBLE GOLF BALL WHATSAPP BUTTON -->
-        <a href="#" 
-           onclick="triggerGolfBlooper(event)"
-           class="secret-golf-ball-btn"
-           title="Join our AELO Golf WhatsApp Group!">
-        </a>
+        <!-- 🤫 EASTER EGG GOLF BALL GROUP -->
+        <div class="secret-golf-ball-container">
+            <!-- Subtle floating hint text -->
+            <span class="hit-me-hint">HIT ME! 🏌️‍♂️</span>
+            
+            <!-- Invisible clickable area over the ball -->
+            <a href="#" 
+               onclick="triggerGolfBlooper(event)"
+               class="secret-golf-ball-btn"
+               title="Join our AELO Golf WhatsApp Group!">
+            </a>
+        </div>
 
         
 
