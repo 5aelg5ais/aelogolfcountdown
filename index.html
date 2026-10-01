@@ -413,6 +413,82 @@
             animation: neonPulseFast 1s ease-in-out infinite alternate;
         }
 
+        /* --- 📱 REGISTRATION FORM STYLING --- */
+        .registration-form-container {
+            margin: 20px auto 0 auto;
+            max-width: 280px; /* Keeps the input box tidy and centered */
+            z-index: 10;
+        }
+
+        #checkinForm {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        #mobileNumber {
+            width: 100%;
+            padding: 12px;
+            /* Creates a semi-transparent dark glass effect */
+            background: rgba(0, 0, 0, 0.5); 
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            border-radius: 8px;
+            font-size: 1rem;
+            text-align: center;
+            outline: none;
+            backdrop-filter: blur(4px); /* Blurs the grass slightly behind the input */
+            transition: border-color 0.2s ease;
+        }
+
+        #mobileNumber::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        #mobileNumber:focus {
+            border-color: #FFD700; /* Glows gold when typing */
+        }
+
+        #verifyBtn {
+            background-color: #FFD700; /* Matches your glowing clinic text */
+            color: #000000;
+            border: none;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: 900;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            text-transform: uppercase;
+        }
+
+        #verifyBtn:hover {
+            transform: scale(1.03);
+            background-color: #fff07c;
+        }
+
+        #verifyBtn:disabled {
+            background-color: #888888;
+            color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #resultMessage {
+            margin-top: 12px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            min-height: 24px;
+            /* Heavy shadow to keep status text readable against the background */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+        }
+
+        /* Status Colors updated to pop against the dark grass */
+        .success { color: #4CAF50; } 
+        .not-found { color: #FF5252; } 
+        .error { color: #FFC107; }
+
     </style>
 </head>
 <body>
@@ -444,7 +520,15 @@
             <p class="event-info">2 Oct 2026</p>
             <p class="event-info">Sembawang Country Club</p>
             <p class="event-info">1130H to 2130H</p>
-            <p class="event-clinic">-</p>
+
+            <!-- 📱 NEW: INLINE REGISTRATION FORM -->
+            <div class="registration-form-container">
+                <form id="checkinForm">
+                    <input type="text" id="mobileNumber" placeholder="Mobile (e.g. 91234567)" required autocomplete="off">
+                    <button type="submit" id="verifyBtn">Verify / Register</button>
+                </form>
+                <div id="resultMessage"></div>
+            </div>
         </div>
 
         <!-- ⬅️ LEFT COLUMN: Registration -->
@@ -560,6 +644,51 @@
         // 🔗 Replace this with your actual WhatsApp invite link
         window.open("https://chat.whatsapp.com/CmTnh54YVTUHW8FwMI2hJ6", "_blank");
     }
+
+    // --- 📱 REGISTRATION VERIFICATION SCRIPT ---
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw6SOpZ1RbA7vgMq6bXoUDkv3-84iLKDGKNnRWp3MoOUH-IHzVZIpo1jfhtXt55OBJVlA/exec";
+
+    document.getElementById('checkinForm').addEventListener('submit', function(e) {
+        e.preventDefault(); 
+        
+        const mobileInput = document.getElementById('mobileNumber').value.trim();
+        const resultDiv = document.getElementById('resultMessage');
+        const verifyBtn = document.getElementById('verifyBtn');
+
+        if (!mobileInput) return;
+
+        verifyBtn.disabled = true;
+        verifyBtn.textContent = "Checking...";
+        resultDiv.textContent = "";
+        resultDiv.className = "";
+
+        const requestUrl = `${SCRIPT_URL}?mobile=${encodeURIComponent(mobileInput)}`;
+
+        fetch(requestUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    resultDiv.textContent = "✅ User is Registered!";
+                    resultDiv.className = "success";
+                } else if (data.status === 'not_found') {
+                    resultDiv.textContent = "❌ Number not found.";
+                    resultDiv.className = "not-found";
+                } else {
+                    resultDiv.textContent = "⚠️ Error: " + data.message;
+                    resultDiv.className = "error";
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                resultDiv.textContent = "⚠️ Connection error.";
+                resultDiv.className = "error";
+            })
+            .finally(() => {
+                verifyBtn.disabled = false;
+                verifyBtn.textContent = "Verify / Register";
+                document.getElementById('mobileNumber').value = '';
+            });
+    });
     </script>
 </body>
 </html>
